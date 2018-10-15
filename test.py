@@ -61,6 +61,8 @@ def test():
 
     model = inception_v1.inception_v1_model(hyparams)
     
+    if os.path.isdir(FLAGS.restore_dir):
+        FLAGS.restore_dir += model.get_name() + '.ckpt'
     if not os.path.exists(FLAGS.restore_dir):
         raise ValueError("Can't find restore directory!(%s)" % FLAGS.restore_dir)
 
@@ -115,7 +117,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--restore_dir',
         type=str,
-        default='./data/inception_v1/inception_v1.ckpt',
+        default='./data/saved_model/',
         help='Directory where to write event logs and checkpoint.')
     parser.add_argument(
         '--use_train_data',

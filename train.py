@@ -46,10 +46,9 @@ import time
 
 import numpy as np
 import tensorflow as tf
-from cifar10_input import cifar10_reader
-from imagenet_input import imagenet_reader
+from input_generator import file_reader
 from hyper_params import hyparams as param
-import models
+from models import inception_v1
 
 FLAGS = None
 
@@ -58,7 +57,7 @@ def train():
     """Train CIFAR-10 for a number of steps."""
 
     # data_reader = cifar10_reader()
-    data_reader = imagenet_reader()
+    data_reader = file_reader(fake=True, fake_class_num=1001)
     hyparams = param()
     hyparams.data_info(data_reader)
 
