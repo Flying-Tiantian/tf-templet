@@ -48,7 +48,7 @@ import numpy as np
 import tensorflow as tf
 
 from hyper_params import hyparams as param
-from models import inception_v1
+from models import bvlc_alexnet
 from input_generator import file_reader
 
 FLAGS = None
@@ -59,12 +59,7 @@ def test():
     hyparams = param()
     hyparams.data_info(data_reader)
 
-    model = inception_v1.inception_v1_model(hyparams)
-    
-    if os.path.isdir(FLAGS.restore_dir):
-        FLAGS.restore_dir += model.get_name() + '.ckpt'
-    if not os.path.exists(FLAGS.restore_dir):
-        raise ValueError("Can't find restore directory!(%s)" % FLAGS.restore_dir)
+    model = bvlc_alexnet.bvlc_alexnet(hyparams)
 
     with tf.Graph().as_default():
         if FLAGS.use_train_data:
@@ -126,4 +121,5 @@ if __name__ == '__main__':
         help='Whether to test train acc.')
 
     FLAGS, unparsed = parser.parse_known_args()
-    tf.app.run(main=main, argv=[sys.argv[0]] + unparsed)
+    main(argv=[sys.argv[0]] + unparsed)
+    # tf.app.run(main=main, argv=[sys.argv[0]] + unparsed)

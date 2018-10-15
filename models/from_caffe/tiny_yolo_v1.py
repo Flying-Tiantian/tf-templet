@@ -1,0 +1,28 @@
+from .network import Network
+
+class TinyYolo(Network):
+    def setup(self):
+        (self.feed('data')
+             .conv(3, 3, 16, 1, 1, biased=False, relu=False, name='conv1')
+             .batch_normalization(relu=True, name='bn1')
+             .max_pool(2, 2, 2, 2, name='pool1')
+             .conv(3, 3, 32, 1, 1, biased=False, relu=False, name='conv2')
+             .batch_normalization(relu=True, name='bn2')
+             .max_pool(2, 2, 2, 2, name='pool2')
+             .conv(3, 3, 64, 1, 1, biased=False, relu=False, name='conv3')
+             .batch_normalization(relu=True, name='bn3')
+             .max_pool(2, 2, 2, 2, name='pool3')
+             .conv(3, 3, 128, 1, 1, biased=False, relu=False, name='conv4')
+             .batch_normalization(relu=True, name='bn4')
+             .max_pool(2, 2, 2, 2, name='pool4')
+             .conv(3, 3, 256, 1, 1, biased=False, relu=False, name='conv5')
+             .batch_normalization(relu=True, name='bn5')
+             .max_pool(2, 2, 2, 2, name='pool5')
+             .conv(3, 3, 512, 1, 1, biased=False, relu=False, name='conv6')
+             .batch_normalization(relu=True, name='bn6')
+             .max_pool(2, 2, 2, 2, name='pool6')
+             .conv(3, 3, 1024, 1, 1, biased=False, relu=False, name='conv7')
+             .batch_normalization(relu=True, name='bn7')
+             .conv(3, 3, 256, 1, 1, biased=False, relu=False, name='conv8')
+             .batch_normalization(relu=True, name='bn8')
+             .fc(1470, relu=False, name='fc9'))

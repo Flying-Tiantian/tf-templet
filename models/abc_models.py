@@ -85,8 +85,9 @@ class base_model(object):
                 if ckpt and ckpt.model_checkpoint_path:
                     checkpoint_path = ckpt.model_checkpoint_path
                 else:
-                    print('No checkpoint file found')
-                    return -1
+                    checkpoint_path = os.path.join(checkpoint_dir, self._name + '.ckpt')
+                    if not os.path.exists(checkpoint_path):
+                        return -1
             else:
                 checkpoint_path = checkpoint_dir
             saver = self._get_saver()
