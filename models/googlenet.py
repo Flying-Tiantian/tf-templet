@@ -4,7 +4,7 @@ from .abc_models import classification_model
 import tensorflow.contrib.layers as layers
 import tensorflow.contrib.framework as ops
 
-class from_py_model(classification_model):
+class googlenet_model(classification_model):
     def __init__(self, hyparams, ):
         classification_model.__init__(self, hyparams)
         self._name = 'googlenet_model'

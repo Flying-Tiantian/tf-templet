@@ -7,7 +7,7 @@ from .abc_models import classification_model
 class yolo_tiny_model(classification_model):
     def __init__(self, hyparams):
         classification_model.__init__(self, hyparams)
-        self._name = 'yolo_tiny_model'
+        self._name = 'yolo_tiny'
         self._input_size = 448
 
     def conv_layer(self, idx, inputs, filters, size, stride):

@@ -48,7 +48,7 @@ import numpy as np
 import tensorflow as tf
 
 from hyper_params import hyparams as param
-from models import bvlc_alexnet
+from models import squeezenet
 from input_generator import file_reader
 
 FLAGS = None
@@ -59,7 +59,7 @@ def test():
     hyparams = param()
     hyparams.data_info(data_reader)
 
-    model = bvlc_alexnet.bvlc_alexnet(hyparams)
+    model = squeezenet.squeezenet_model(hyparams)
 
     with tf.Graph().as_default():
         if FLAGS.use_train_data:
@@ -85,7 +85,8 @@ def test():
 
             gstepvalue = model.restore(sess, FLAGS.restore_dir)
             if gstepvalue == -1:
-                raise ValueError("can not find checkpoint!")
+                pass
+                # raise ValueError("can not find checkpoint!")
 
             true_count = 0  # Counts the number of correct predictions.
             total_sample_count = 0
