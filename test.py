@@ -86,7 +86,7 @@ def test():
             gstepvalue = model.restore(sess, FLAGS.restore_dir)
             if gstepvalue == -1:
                 pass
-                # raise ValueError("can not find checkpoint!")
+                raise ValueError("can not find checkpoint!")
 
             true_count = 0  # Counts the number of correct predictions.
             total_sample_count = 0
