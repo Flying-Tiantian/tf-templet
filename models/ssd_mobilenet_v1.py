@@ -3,7 +3,7 @@ import tensorflow as tf
 
 from .abc_models import base_model
 
-class ssd_mobilenet_v1_model(base_model):
+'''class ssd_mobilenet_v1_model(base_model):
     def __init__(self, hyparams):
         base_model.__init__(self, hyparams)
         self._hyparams = hyparams
@@ -31,4 +31,4 @@ class ssd_mobilenet_v1_model(base_model):
 
             top_k_op = tf.nn.in_top_k(logits, test_data['labels'], 1)
 
-        return top_k_op
+        return top_k_op'''
