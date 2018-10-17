@@ -48,15 +48,12 @@ import numpy as np
 import tensorflow as tf
 from input_generator import file_reader
 from hyper_params import hyparams as param
-from models import inception_v1
+from models import alexnet
 
 FLAGS = None
 
 
 def train():
-    """Train CIFAR-10 for a number of steps."""
-
-    # data_reader = cifar10_reader()
     data_reader = file_reader(fake=True, fake_class_num=1001)
     hyparams = param()
     hyparams.data_info(data_reader)
@@ -70,12 +67,9 @@ def train():
     else:
         hyparams.max_steps = FLAGS.max_steps
 
-    # model = models.cifar10_model(hyparams)
-    # model = models.dropout_resnet18_model(hyparams)
-    model = models.slim_resnet34_model(hyparams)
-    # model = models.vgg_16_model(hyparams)
+    model = alexnet.alexnet_model(hyparams)
 
-    FLAGS.train_dir += model.get_name()
+    FLAGS.train_dir = os.path.join(FLAGS.train_dir, model.get_name())
     
     if tf.gfile.Exists(FLAGS.train_dir):
         pass
@@ -160,7 +154,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--train_dir',
         type=str,
-        default='./data/imagenet_train/',
+        default='./data/train/',
         help='Directory where to write event logs and checkpoint.')
     parser.add_argument(
         '--init_lr',
@@ -173,11 +167,6 @@ if __name__ == '__main__':
         default=1,
         help='The number of gpu to use.')
     parser.add_argument(
-        '--pruning_hparams',
-        type=str,
-        default='',
-        help="""Comma separated list of pruning-related hyperparameters""")
-    parser.add_argument(
         '--max_steps',
         type=int,
         default=0,
@@ -189,4 +178,5 @@ if __name__ == '__main__':
         help='Whether to log device placement.')
 
     FLAGS, unparsed = parser.parse_known_args()
-    tf.app.run(main=main, argv=[sys.argv[0]] + unparsed)
+    main(argv=[sys.argv[0]] + unparsed)
+    # tf.app.run(main=main, argv=[sys.argv[0]] + unparsed)

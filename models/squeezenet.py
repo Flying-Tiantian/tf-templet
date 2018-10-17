@@ -11,9 +11,8 @@ class squeezenet_model(classification_model):
         self._input_size = 224
 
         self.dropout   = 1.0
-
         self.sq_ratio  = 1
-
+        
         self.weights = {}
         self.net = {}
 
